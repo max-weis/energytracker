@@ -1,13 +1,15 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import { Navigation } from "~/components/Navigation";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: Home,
-})
+});
 
 function Home() {
   return (
-    <div className="p-2">
+    <div className="relative flex min-h-screen flex-col">
+      <Navigation />
       <h3>Welcome Home!!!</h3>
     </div>
-  )
+  );
 }
