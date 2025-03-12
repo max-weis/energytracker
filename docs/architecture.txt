@@ -1,0 +1,44 @@
+EnergyTracker - Technical Architecture & Design Document
+
+1. Overview
+EnergyTracker is a monolithic web application designed to track electricity and gas consumption, 
+manage pricing, store meter readings, calculate expenditures, and forecast future usage trends.
+
+2. Technology Stack
+| Layer           | Technology |
+|----------------|-----------|
+| Framework      | TanStack Start |
+| Language       | TypeScript |
+| Routing        | TanStack Router |
+| State & Data   | TanStack Query |
+| UI Library     | ShadCN (Radix UI) + TailwindCSS |
+| Database       | SQLite (via Kysely ORM) |
+| Architecture   | Monolithic, Vertical Slice Architecture |
+
+3. Architectural Approach
+The application follows a Vertical Slice Architecture, where each feature (pricing, meter readings, 
+expenditure tracking, forecasting, etc.) is self-contained, managing its own UI, logic, and database interactions.
+
+Key Benefits:
+- Feature-based structure rather than technical layers.
+- Self-contained slices for improved maintainability.
+- Direct function calls instead of API requests.
+
+4. UI and State Management
+- ShadCN (Radix UI) + TailwindCSS for UI components.
+- TanStack Query for state management and data fetching.
+- TanStack Router for routing between different views.
+
+5. Data Model Considerations
+- SQLite (via Kysely) for lightweight and embedded database access.
+- Direct function calls instead of API-based communication.
+
+6. Performance Considerations
+- TanStack Query caching for real-time data updates.
+- SQLite indexing for optimized data retrieval.
+- Lazy loading & code splitting in the UI.
+
+7. Summary
+This document outlines a monolithic architecture leveraging TanStack Start, SQLite (via Kysely), 
+ShadCN + Tailwind, and Vertical Slice Architecture to build a maintainable and performant 
+personal energy-tracking application.

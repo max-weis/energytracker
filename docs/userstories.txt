@@ -1,0 +1,105 @@
+------------------------------------------------------------
+EnergyTracker - Epics, User Stories, and Tasks
+------------------------------------------------------------
+
+Epic 1: Price Management
+
+User Story 1.1: Enter and Save Pricing Data
+  As a user, I want to input and save electricity and gas prices (including any base prices) so that I have an up-to-date record of current rates.
+  - Task 1.1.1: Design and develop a clean UI form for entering electricity and gas prices.
+  - Task 1.1.2: Implement input validation to ensure prices are within reasonable limits.
+  - Task 1.1.3: Create a backend API endpoint to persist pricing data.
+  - Task 1.1.4: Design and implement a database model for storing price records (with effective dates/timestamps).
+
+User Story 1.2: Update Pricing Information
+  As a user, I want to update current pricing data without losing historical records so that I can review price trends over time.
+  - Task 1.2.1: Develop functionality to allow editing of current price records.
+  - Task 1.2.2: Implement versioning or timestamping to preserve historical pricing.
+  - Task 1.2.3: Create UI components to confirm updates and show effective dates.
+  - Task 1.2.4: Write unit tests to ensure data integrity during updates.
+
+User Story 1.3: View Price History
+  As a user, I want to see a complete history of all saved prices along with effective dates so that I can track changes over time.
+  - Task 1.3.1: Design a historical price view (e.g., a table or timeline).
+  - Task 1.3.2: Implement an API endpoint to retrieve all price records.
+  - Task 1.3.3: Add filtering/sorting options (by date or type) in the UI.
+  - Task 1.3.4: Ensure responsive design for different devices.
+
+------------------------------------------------------------
+Epic 2: Meter Reading Management
+
+User Story 2.1: Record Meter Readings
+  As a user, I want to record my current electricity and gas meter readings so that my consumption data is captured regularly.
+  - Task 2.1.1: Create a user-friendly form for entering meter readings.
+  - Task 2.1.2: Validate inputs to avoid incorrect or duplicate entries.
+  - Task 2.1.3: Develop a backend endpoint to store meter reading data with timestamps.
+  - Task 2.1.4: Set up a database model for meter readings.
+
+User Story 2.2: View Aggregated Meter Readings
+  As a user, I want to view my meter readings aggregated by week, month, quarter, and year so that I can identify consumption trends.
+  - Task 2.2.1: Define aggregation logic on the backend (grouping readings by time periods).
+  - Task 2.2.2: Design a UI component (charts/tables) to display aggregated data.
+  - Task 2.2.3: Provide options to switch between different time scales.
+  - Task 2.2.4: Implement caching if needed for performance.
+
+------------------------------------------------------------
+Epic 3: Expenditure Tracking
+
+User Story 3.1: Compute Expenditures
+  As a user, I want the system to compute expenditures based on meter readings and corresponding prices so that I can see my energy spending.
+  - Task 3.1.1: Develop the calculation logic that links meter readings with the effective price at the time.
+  - Task 3.1.2: Create API endpoints for expenditure computation.
+  - Task 3.1.3: Implement unit tests to verify correct calculations.
+  - Task 3.1.4: Integrate error handling for missing or mismatched data.
+
+User Story 3.2: View Expenditure Summaries
+  As a user, I want to view my energy expenditures summarized by week, month, quarter, and year to better analyze my spending patterns.
+  - Task 3.2.1: Create a UI view that presents expenditure summaries (tables, graphs, etc.).
+  - Task 3.2.2: Implement filtering mechanisms to allow time period selection.
+  - Task 3.2.3: Connect the UI with the backend aggregation logic.
+  - Task 3.2.4: Optimize queries for quick response times.
+
+------------------------------------------------------------
+Epic 4: Forecasting and Interpolation
+
+User Story 4.1: Forecast Future Usage and Expenditures
+  As a user, I want the app to estimate future energy usage and costs based on historical trends so that I can plan ahead.
+  - Task 4.1.1: Research and select appropriate interpolation/forecasting algorithms.
+  - Task 4.1.2: Implement the algorithm on historical meter readings and pricing data.
+  - Task 4.1.3: Create an API endpoint that returns forecasted data.
+  - Task 4.1.4: Validate and test forecasting accuracy with historical data.
+
+User Story 4.2: Compare Actual vs. Forecasted Data
+  As a user, I want to compare my actual energy usage with forecasted trends to identify any discrepancies.
+  - Task 4.2.1: Design a comparison view (side-by-side or overlay charts).
+  - Task 4.2.2: Integrate forecasted and actual data on the dashboard.
+  - Task 4.2.3: Provide visual cues (colors, labels) to highlight differences.
+  - Task 4.2.4: Implement user feedback for refining forecast parameters.
+
+------------------------------------------------------------
+Epic 5: Dashboard and Reporting
+
+User Story 5.1: Display a Summary Dashboard
+  As a user, I want a dashboard that provides quick insights into my current meter readings, pricing trends, expenditures, and forecasts so that I have a holistic view of my energy usage.
+  - Task 5.1.1: Design the dashboard layout with sections for each key metric.
+  - Task 5.1.2: Create UI components (charts, tables) to represent data summaries.
+  - Task 5.1.3: Integrate real-time data fetching from the backend.
+  - Task 5.1.4: Ensure the dashboard is responsive and intuitive.
+
+User Story 5.2: Filter and Drill Down into Data
+  As a user, I want to filter data by different time ranges (week, month, quarter, year) and drill down into detailed reports so that I can perform in-depth analysis of my consumption and spending.
+  - Task 5.2.1: Implement filtering controls in the UI.
+  - Task 5.2.2: Develop backend endpoints that support dynamic queries based on time ranges.
+  - Task 5.2.3: Design detailed report views with clear breakdowns.
+  - Task 5.2.4: Test the performance and accuracy of filtered queries.
+
+------------------------------------------------------------
+Additional Non-Functional Considerations
+
+Data Persistence & Integrity:
+  - Ensure all data models (prices, readings, computed expenditures) include appropriate timestamping and versioning.
+  - Develop robust error handling and input validation across all modules.
+
+Usability & Performance:
+  - Focus on a clean, intuitive interface with straightforward navigation.
+  - Optimize aggregation queries and forecasting computations for efficiency.

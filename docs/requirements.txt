@@ -1,0 +1,99 @@
+----------------------------------------------
+Requirements Analysis for Electricity & Gas Tracking App
+----------------------------------------------
+
+1. Overview:
+The application is intended for personal use to track electricity and gas consumption costs. It will allow you to record pricing data, store meter readings, and view consumption and expenditure trends over various time periods. The tool will also estimate future usage/expenditures based on historical data.
+
+2. Functional Requirements:
+
+A. Price Management:
+- Saving Prices:
+  - Ability to input and persist electricity and gas prices (e.g., cost per kWh) along with any applicable base prices.
+- Updating Prices:
+  - Option to modify current pricing information while preserving historical changes.
+- Viewing Prices:
+  - Retrieve the current prices.
+  - Display a complete history of all saved prices, with timestamps or effective dates.
+
+B. Meter Reading Management:
+- Persisting Readings:
+  - Input and store the current meter readings for both electricity and gas.
+- Aggregated Views:
+  - Display meter readings aggregated over selectable time periods (week, month, quarter, year).
+
+C. Expenditure Tracking:
+- Expenditure Calculation:
+  - Compute expenditures based on meter readings and the associated prices.
+- Aggregated Expenditure Views:
+  - Present expenditures for chosen time periods (week, month, quarter, year).
+
+D. Usage and Expenditure Interpolation:
+- Historical-Based Estimation:
+  - Provide interpolation or estimation of future usage and expenditures based on previous trends.
+  - Allow the user to compare actual recorded values with interpolated estimates.
+
+3. Non-Functional Requirements:
+- Single-User Focus:
+  - The app is designed for personal use, hence no authentication or multi-user support is required.
+- Data Persistence and Integrity:
+  - Ensure that both the pricing history and meter readings are stored reliably.
+  - Maintain clear versioning or timestamping to support historical data retrieval.
+- Usability:
+  - Intuitive user interface for data entry and data visualization.
+  - Clear, accessible reporting on consumption trends and expenditure summaries.
+- Performance:
+  - Efficient aggregation of data across different time scales (week, month, quarter, year).
+  - Quick computation of interpolated estimates based on historical data.
+
+4. Data Considerations:
+
+Entities and Attributes:
+- Price Record:
+  - Attributes: Electricity price (kWh), Gas price (kWh), Base price, Effective date/time.
+- Meter Reading:
+  - Attributes: Electricity reading, Gas reading, Date/time stamp.
+- Computed Data:
+  - Expenditures: Derived from meter readings and applicable prices.
+  - Interpolated Estimates: Derived from historical trends in usage and expenditures.
+
+Data Relationships:
+- Historical Tracking:
+  - Each new price or meter reading is timestamped to allow for a historical view.
+  - Expenditures are computed based on readings and pricing effective at that time.
+
+5. Use Cases:
+- Price Entry Use Case:
+  - Enter new pricing details and save them.
+  - Update existing prices, ensuring historical data remains intact.
+- Meter Reading Entry Use Case:
+  - Input current meter readings as they are recorded.
+- Historical Review Use Case:
+  - View a list or timeline of past prices.
+  - Review meter readings over selected time intervals.
+- Expenditure Analysis Use Case:
+  - Calculate and view expenditure summaries per week/month/quarter/year.
+- Interpolation Use Case:
+  - Generate and display usage/expenditure forecasts based on historical data trends.
+
+6. Reporting & Dashboard Considerations:
+- Dashboard Views:
+  - Summarized visualizations or tables for quick insights:
+    - Current vs. historical meter readings.
+    - Expenditure summaries.
+    - Forecasted trends based on interpolation.
+- User Selections:
+  - Allow the user to select specific time ranges to view detailed breakdowns.
+
+7. Data Validation and Error Handling:
+- Input Validation:
+  - Ensure that all entries for prices and meter readings are within reasonable limits.
+  - Prevent duplicate entries for the same effective date/time if applicable.
+- Error Handling:
+  - Provide user feedback for incorrect or incomplete inputs.
+  - Maintain data integrity when updating or interpolating data.
+
+8. Maintenance & Scalability (Non-Functional):
+- Simplicity for Personal Use:
+  - Focus on a streamlined, easy-to-maintain application.
+  - Data models and interfaces should be designed to facilitate simple updates as your usage patterns evolve.
