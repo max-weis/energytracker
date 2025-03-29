@@ -3,7 +3,18 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-export function PricesEnergyCard() {
+type Prices = {
+  electricity_base_price: number;
+  electricity_unit_price: number;
+  gas_base_price: number;
+  gas_unit_price: number;
+}
+
+type PricesEnergyCardProps = {
+  price: Prices | null
+}
+
+export function PricesEnergyCard({ price: data }: PricesEnergyCardProps) {
   return (
     <div>
       <Card>
@@ -12,7 +23,7 @@ export function PricesEnergyCard() {
             <CardTitle>Energy Prices</CardTitle>
             <CardDescription>Configure the prices used to calculate your energy costs</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="py-6 space-y-6">
             <div className="space-y-4">
               <h3 className="font-medium">Electricity</h3>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -21,8 +32,9 @@ export function PricesEnergyCard() {
                   <Input
                     id="electricity-base"
                     type="number"
-                    step="0.01"
+                    step="1"
                     min="0"
+                    value={data?.electricity_base_price}
                   />
                 </div>
                 <div className="space-y-2">
@@ -30,8 +42,9 @@ export function PricesEnergyCard() {
                   <Input
                     id="electricity-unit"
                     type="number"
-                    step="0.001"
+                    step="1"
                     min="0"
+                    value={data?.electricity_unit_price}
                   />
                 </div>
               </div>
@@ -45,8 +58,9 @@ export function PricesEnergyCard() {
                   <Input
                     id="gas-base"
                     type="number"
-                    step="0.01"
+                    step="1"
                     min="0"
+                    value={data?.gas_base_price}
                   />
                 </div>
                 <div className="space-y-2">
@@ -54,15 +68,17 @@ export function PricesEnergyCard() {
                   <Input
                     id="gas-unit"
                     type="number"
-                    step="0.001"
+                    step="1"
                     min="0"
+                    value={data?.gas_unit_price}
                   />
                 </div>
               </div>
             </div>
           </CardContent>
+
           <CardFooter>
-            <Button className="mt-8" variant="outline" type="submit">Save Changes</Button>
+            <Button className="mt-4" variant="outline" type="submit">Save Changes</Button>
           </CardFooter>
         </form>
       </Card>
