@@ -29,6 +29,5 @@ function PriceComponent() {
         <PricesEnergyCard price={data} />
       </div>
     </div>
-
   );
 }
