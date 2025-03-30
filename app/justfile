@@ -1,0 +1,5 @@
+default: migrate
+
+migrate:
+    @touch energytracker.db
+    @migrate -database "sqlite3://./energytracker.db" -path ./migrations up 

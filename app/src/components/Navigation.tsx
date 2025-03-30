@@ -1,5 +1,3 @@
-"use client";
-
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -28,8 +26,8 @@ const items = [
     href: "/reports",
   },
   {
-    title: "Settings",
-    href: "/settings",
+    title: "Prices",
+    href: "/prices",
   },
 ];
 

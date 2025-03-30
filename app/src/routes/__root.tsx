@@ -9,9 +9,10 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import * as React from "react";
 import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
+import { Navigation } from "~/components/Navigation";
 import { NotFound } from "~/components/NotFound";
 import appCss from "~/styles/app.css?url";
-import { seo } from "~/utils/seo";
+import { seo } from "~/lib/seo";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -51,6 +52,7 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   return (
     <RootDocument>
+      <Navigation />
       <Outlet />
     </RootDocument>
   );
