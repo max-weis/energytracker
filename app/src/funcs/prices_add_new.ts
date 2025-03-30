@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { db } from "~/lib/db/sqlite";
 
-export type NewPriceType = {
+type NewPriceType = {
   electricity_base_price: number;
   electricity_unit_price: number;
   gas_base_price: number;
@@ -10,8 +10,8 @@ export type NewPriceType = {
 
 export const addNewPrice = createServerFn({
   method: "POST",
-}).handler(async (ctx) => {
+}).validator((data: NewPriceType) => data).handler(async (ctx) => {
   const data = ctx.data as unknown as NewPriceType;
 
-  await db.insertInto("prices").values(data).execute();
+  return db.insertInto("prices").values(data).execute();
 });

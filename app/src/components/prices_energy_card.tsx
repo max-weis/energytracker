@@ -1,10 +1,11 @@
-import { addNewPrice, NewPriceType } from "~/funcs/prices_add_new";
+import { addNewPrice } from "~/funcs/prices_add_new";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useForm } from '@tanstack/react-form'
 import { useMutation } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 
 type Prices = {
   electricity_base_price: number;
@@ -18,9 +19,8 @@ type PricesEnergyCardProps = {
 }
 
 export function PricesEnergyCard({ price }: PricesEnergyCardProps) {
-  const addNewPriceMutation = useMutation<unknown, Error, NewPriceType>({
-    mutationKey: ['addNewPrice'],
-    mutationFn: addNewPrice,
+  const addNewPriceMutation = useMutation({
+    mutationFn: useServerFn(addNewPrice),
   })
 
   const form = useForm({
@@ -31,10 +31,9 @@ export function PricesEnergyCard({ price }: PricesEnergyCardProps) {
       gas_unit_price: price?.gas_unit_price || 0,
     },
     onSubmit: async ({ value }) => {
-      await addNewPriceMutation.mutateAsync(value);
+      await addNewPriceMutation.mutateAsync({ data: value });
     },
   });
-
 
   return (
     <div>
@@ -67,6 +66,9 @@ export function PricesEnergyCard({ price }: PricesEnergyCardProps) {
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(+e.target.value)}
                           />
+                          {field.state.meta.errors ? (
+                            <em role="alert">{field.state.meta.errors.join(', ')}</em>
+                          ) : null}
                         </>
                       )
                     }}
