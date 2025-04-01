@@ -1,20 +1,24 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { PricesEnergyCard } from "~/components/prices_energy_card";
+import { PricesEnergyTable } from "~/components/prices_energy_table";
 import { Spinner } from "~/components/spinner";
+import { loadAllPricesOpts } from "~/funcs/prices_load_all";
 import { loadLatestPricesOpts } from "~/funcs/prices_load_latest";
 
 export const Route = createFileRoute("/prices")({
   component: PriceComponent,
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(loadLatestPricesOpts());
+    await context.queryClient.ensureQueryData(loadAllPricesOpts());
   },
 });
 
 function PriceComponent() {
-  const { isLoading } = useSuspenseQuery(loadLatestPricesOpts());
+  const { isLoading: latestLoading } = useSuspenseQuery(loadLatestPricesOpts());
+  const { isLoading: allLoading } = useSuspenseQuery(loadAllPricesOpts());
 
-  if (isLoading) return <Spinner />;
+  if (latestLoading && allLoading) return <Spinner />;
 
   return (
     <div className="min-h-screen p-4 md:p-6 pt-6">
@@ -24,6 +28,7 @@ function PriceComponent() {
         </div>
 
         <PricesEnergyCard />
+        <PricesEnergyTable />
       </div>
     </div>
   );

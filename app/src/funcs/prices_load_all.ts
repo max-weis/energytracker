@@ -2,19 +2,18 @@ import { queryOptions } from "@tanstack/react-query";
 import { createServerFn } from "@tanstack/react-start";
 import { db } from "~/lib/db/sqlite";
 
-export const loadLatestPricesOpts = () =>
+export const loadAllPricesOpts = () =>
   queryOptions({
-    queryKey: ["loadLatestPrices"],
-    queryFn: loadLatestPrices,
+    queryKey: ["loadAllPrices"],
+    queryFn: loadAllPrices,
   });
 
-export const loadLatestPrices = createServerFn().handler(async () => {
+export const loadAllPrices = createServerFn().handler(async () => {
   const latest = await db
     .selectFrom("prices")
     .selectAll()
     .orderBy("created_at desc")
-    .limit(1)
-    .executeTakeFirst();
+    .execute();
 
   if (!latest) return null;
 
