@@ -8,9 +8,9 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import * as React from "react";
-import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary";
-import { Navigation } from "~/components/Navigation";
-import { NotFound } from "~/components/NotFound";
+import { DefaultCatchBoundary } from "~/components/default_catch_boundary";
+import { Navigation } from "~/components/navigation";
+import { NotFound } from "~/components/not_found";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/lib/seo";
 

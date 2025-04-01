@@ -4,21 +4,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useForm } from '@tanstack/react-form'
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { loadLatestPricesOpts } from "~/funcs/prices_load_latest";
 
-type Prices = {
-  electricity_base_price: number;
-  electricity_unit_price: number;
-  gas_base_price: number;
-  gas_unit_price: number;
-}
+export function PricesEnergyCard() {
+  const { data: price } = useSuspenseQuery(loadLatestPricesOpts())
 
-type PricesEnergyCardProps = {
-  price: Prices | null
-}
-
-export function PricesEnergyCard({ price }: PricesEnergyCardProps) {
   const addNewPriceMutation = useMutation({
     mutationFn: useServerFn(addNewPrice),
   })
