@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ReadingsImport } from './routes/readings'
 import { Route as PricesImport } from './routes/prices'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const ReadingsRoute = ReadingsImport.update({
+  id: '/readings',
+  path: '/readings',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const PricesRoute = PricesImport.update({
   id: '/prices',
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricesImport
       parentRoute: typeof rootRoute
     }
+    '/readings': {
+      id: '/readings'
+      path: '/readings'
+      fullPath: '/readings'
+      preLoaderRoute: typeof ReadingsImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/prices': typeof PricesRoute
+  '/readings': typeof ReadingsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/prices': typeof PricesRoute
+  '/readings': typeof ReadingsRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/prices': typeof PricesRoute
+  '/readings': typeof ReadingsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/prices'
+  fullPaths: '/' | '/prices' | '/readings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/prices'
-  id: '__root__' | '/' | '/prices'
+  to: '/' | '/prices' | '/readings'
+  id: '__root__' | '/' | '/prices' | '/readings'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PricesRoute: typeof PricesRoute
+  ReadingsRoute: typeof ReadingsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PricesRoute: PricesRoute,
+  ReadingsRoute: ReadingsRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/prices"
+        "/prices",
+        "/readings"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/prices": {
       "filePath": "prices.tsx"
+    },
+    "/readings": {
+      "filePath": "readings.tsx"
     }
   }
 }

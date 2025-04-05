@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS electricity_reading (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  kwh INTEGER NOT NULL,
+  kwh_difference INTEGER NOT NULL,
+  price INTEGER NOT NULL,
+  electricity_price_id INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  FOREIGN KEY(electricity_price_id) REFERENCES electricity_prices(id)
+);
+
+CREATE TABLE IF NOT EXISTS gas_reading (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  kwh INTEGER NOT NULL,
+  kwh_difference INTEGER NOT NULL,
+  price INTEGER NOT NULL,
+  gas_price_id INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  FOREIGN KEY(gas_price_id) REFERENCES gas_prices(id)
+);
