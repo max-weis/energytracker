@@ -1,17 +1,41 @@
 import { createServerFn } from "@tanstack/react-start";
 import { db } from "~/lib/db/sqlite";
 
+type Price = {
+  base_price: number;
+  unit_price: number;
+};
+
 type NewPriceType = {
-  electricity_base_price: number;
-  electricity_unit_price: number;
-  gas_base_price: number;
-  gas_unit_price: number;
+  newElectricityPrice?: Price;
+  newGasPrice?: Price;
 };
 
 export const addNewPrice = createServerFn({
   method: "POST",
-}).validator((data: NewPriceType) => data).handler(async (ctx) => {
-  const data = ctx.data as unknown as NewPriceType;
+})
+  .validator((data: NewPriceType) => data)
+  .handler(async (ctx) => {
+    const { newElectricityPrice, newGasPrice } = ctx.data as NewPriceType;
+    const insertPromises = [];
 
-  return db.insertInto("prices").values(data).execute();
-});
+    if (newElectricityPrice) {
+      insertPromises.push(
+        db.insertInto("electricity_prices")
+          .values(newElectricityPrice)
+          .execute()
+      );
+    }
+
+    if (newGasPrice) {
+      insertPromises.push(
+        db.insertInto("gas_prices")
+          .values(newGasPrice)
+          .execute()
+      );
+    }
+
+    await Promise.all(insertPromises);
+
+    return { success: true };
+  });

@@ -3,11 +3,11 @@ import { Menu } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { Button } from "./ui/button";
 import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    navigationMenuTriggerStyle,
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
@@ -49,7 +49,7 @@ export function Navigation() {
                     className={cn(
                       navigationMenuTriggerStyle(),
                       location.pathname === item.href &&
-                        "bg-accent text-accent-foreground",
+                      "bg-accent text-accent-foreground",
                     )}
                   >
                     <Link to={item.href}>{item.title}</Link>

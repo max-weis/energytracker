@@ -28,6 +28,10 @@ function PriceComponent() {
         </div>
 
         <PricesEnergyCard />
+        
+        <div className="flex items-center justify-between">
+          <h2 className="text-3xl font-bold tracking-tight">History</h2>
+        </div>
         <PricesEnergyTable />
       </div>
     </div>

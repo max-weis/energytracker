@@ -9,14 +9,25 @@ export const loadLatestPricesOpts = () =>
   });
 
 export const loadLatestPrices = createServerFn().handler(async () => {
-  const latest = await db
-    .selectFrom("prices")
-    .selectAll()
-    .orderBy("created_at desc")
-    .limit(1)
-    .executeTakeFirst();
+  const selectPromises = [
+    db
+      .selectFrom("electricity_prices")
+      .selectAll()
+      .orderBy("created_at", "desc")
+      .limit(1)
+      .executeTakeFirst(),
+    db
+      .selectFrom("gas_prices")
+      .selectAll()
+      .orderBy("created_at", "desc")
+      .limit(1)
+      .executeTakeFirst(),
+  ];
 
-  if (!latest) return null;
+  const [latestElectricityPrice, latestGasPrice] = await Promise.all(selectPromises);
 
-  return latest;
+  return {
+    electricityPrice: latestElectricityPrice ?? null,
+    gasPrice: latestGasPrice ?? null,
+  };
 });

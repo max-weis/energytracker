@@ -24,10 +24,14 @@ export function PricesEnergyCard() {
 
   const form = useForm({
     defaultValues: {
-      electricity_base_price: price?.electricity_base_price || 0,
-      electricity_unit_price: price?.electricity_unit_price || 0,
-      gas_base_price: price?.gas_base_price || 0,
-      gas_unit_price: price?.gas_unit_price || 0,
+      newElectricityPrice: {
+        base_price: price.electricityPrice?.base_price || 0,
+        unit_price: price.electricityPrice?.unit_price || 0,
+      },
+      newGasPrice: {
+        base_price: price.gasPrice?.base_price || 0,
+        unit_price: price.gasPrice?.unit_price || 0,
+      },
     },
     onSubmit: async ({ value }) => {
       await addNewPriceMutation.mutateAsync({ data: value });
@@ -56,7 +60,7 @@ export function PricesEnergyCard() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <form.Field
-                    name="electricity_base_price"
+                    name="newElectricityPrice.base_price"
                     children={(field) => {
                       return (
                         <>
@@ -79,7 +83,7 @@ export function PricesEnergyCard() {
                 </div>
                 <div className="space-y-2">
                   <form.Field
-                    name="electricity_unit_price"
+                    name="newElectricityPrice.unit_price"
                     children={(field) => {
                       return (
                         <>
@@ -108,7 +112,7 @@ export function PricesEnergyCard() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <form.Field
-                    name="gas_base_price"
+                    name="newGasPrice.base_price"
                     children={(field) => {
                       return (
                         <>
@@ -131,7 +135,7 @@ export function PricesEnergyCard() {
                 </div>
                 <div className="space-y-2">
                   <form.Field
-                    name="gas_unit_price"
+                    name="newGasPrice.unit_price"
                     children={(field) => {
                       return (
                         <>
