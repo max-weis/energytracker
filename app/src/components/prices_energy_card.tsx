@@ -56,7 +56,15 @@ export function PricesEnergyCard() {
           </CardHeader>
           <CardContent className="py-6 space-y-6">
             <div className="space-y-4">
-              <h3 className="font-medium">Electricity</h3>
+              <div className="flex items-center justify-between">
+                <h3 className="font-medium">Electricity</h3>
+                <span className="text-sm text-gray-500">
+                  last updated{" "}
+                  {new Date(
+                    price.electricityPrice?.created_at ?? new Date()
+                  ).toLocaleString()}
+                </span>
+              </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <form.Field
@@ -108,7 +116,15 @@ export function PricesEnergyCard() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="font-medium">Gas</h3>
+              <div className="flex items-center justify-between">
+                  <h3 className="font-medium">Gas</h3>
+                  <span className="text-sm text-gray-500">
+                    last updated{" "}
+                    {new Date(
+                      price.gasPrice?.created_at ?? new Date()
+                    ).toLocaleString()}
+                  </span>
+                </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <form.Field
