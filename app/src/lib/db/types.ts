@@ -36,8 +36,8 @@ export type GasReadingTable = {
   kwh: number;
   kwh_difference: number;
   price: number;
-  electricity_price_id: number;
-  created_at: Date;
+  gas_price_id: number;
+  created_at: Generated<Date>;
 };
 
 export type ElectricityReadingTable = {
@@ -46,7 +46,7 @@ export type ElectricityReadingTable = {
   kwh_difference: number;
   price: number;
   electricity_price_id: number;
-  created_at: Date;
+  created_at: Generated<Date>;
 };
 
 export type GasReading = Selectable<GasReadingTable>

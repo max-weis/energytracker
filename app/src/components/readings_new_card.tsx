@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Button } from "./ui/button";
 import {
@@ -13,9 +13,18 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { loadLatestReadingsOpts } from "~/funcs/readings_load_latest";
+import { addNewReadings } from "~/funcs/readings_add_new";
 
 export function ReadingsNewCard() {
   const { data } = useSuspenseQuery(loadLatestReadingsOpts());
+  const queryClient = useQueryClient()
+
+  const addNewReadingMutation = useMutation({
+    mutationFn: useServerFn(addNewReadings),
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["loadLatestReadings"]})
+    }
+  });
 
   const form = useForm({
     defaultValues: {
@@ -23,7 +32,7 @@ export function ReadingsNewCard() {
       gas: data.gas || 0,
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
+      await addNewReadingMutation.mutateAsync({ data: value });
     },
   });
 
@@ -93,6 +102,7 @@ export function ReadingsNewCard() {
               </div>
             </div>
           </CardContent>
+
           <CardFooter>
             <Button className="mt-4" variant="outline" type="submit">
               Save Changes
