@@ -11,17 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ReadingsImport } from './routes/readings'
 import { Route as PricesImport } from './routes/prices'
 import { Route as IndexImport } from './routes/index'
+import { Route as ReadingsIndexImport } from './routes/readings.index'
+import { Route as ReadingsNewImport } from './routes/readings.new'
 
 // Create/Update Routes
-
-const ReadingsRoute = ReadingsImport.update({
-  id: '/readings',
-  path: '/readings',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const PricesRoute = PricesImport.update({
   id: '/prices',
@@ -32,6 +27,18 @@ const PricesRoute = PricesImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReadingsIndexRoute = ReadingsIndexImport.update({
+  id: '/readings/',
+  path: '/readings/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReadingsNewRoute = ReadingsNewImport.update({
+  id: '/readings/new',
+  path: '/readings/new',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,11 +60,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricesImport
       parentRoute: typeof rootRoute
     }
-    '/readings': {
-      id: '/readings'
+    '/readings/new': {
+      id: '/readings/new'
+      path: '/readings/new'
+      fullPath: '/readings/new'
+      preLoaderRoute: typeof ReadingsNewImport
+      parentRoute: typeof rootRoute
+    }
+    '/readings/': {
+      id: '/readings/'
       path: '/readings'
       fullPath: '/readings'
-      preLoaderRoute: typeof ReadingsImport
+      preLoaderRoute: typeof ReadingsIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -68,41 +82,46 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/prices': typeof PricesRoute
-  '/readings': typeof ReadingsRoute
+  '/readings/new': typeof ReadingsNewRoute
+  '/readings': typeof ReadingsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/prices': typeof PricesRoute
-  '/readings': typeof ReadingsRoute
+  '/readings/new': typeof ReadingsNewRoute
+  '/readings': typeof ReadingsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/prices': typeof PricesRoute
-  '/readings': typeof ReadingsRoute
+  '/readings/new': typeof ReadingsNewRoute
+  '/readings/': typeof ReadingsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/prices' | '/readings'
+  fullPaths: '/' | '/prices' | '/readings/new' | '/readings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/prices' | '/readings'
-  id: '__root__' | '/' | '/prices' | '/readings'
+  to: '/' | '/prices' | '/readings/new' | '/readings'
+  id: '__root__' | '/' | '/prices' | '/readings/new' | '/readings/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PricesRoute: typeof PricesRoute
-  ReadingsRoute: typeof ReadingsRoute
+  ReadingsNewRoute: typeof ReadingsNewRoute
+  ReadingsIndexRoute: typeof ReadingsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PricesRoute: PricesRoute,
-  ReadingsRoute: ReadingsRoute,
+  ReadingsNewRoute: ReadingsNewRoute,
+  ReadingsIndexRoute: ReadingsIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/prices",
-        "/readings"
+        "/readings/new",
+        "/readings/"
       ]
     },
     "/": {
@@ -126,8 +146,11 @@ export const routeTree = rootRoute
     "/prices": {
       "filePath": "prices.tsx"
     },
-    "/readings": {
-      "filePath": "readings.tsx"
+    "/readings/new": {
+      "filePath": "readings.new.tsx"
+    },
+    "/readings/": {
+      "filePath": "readings.index.tsx"
     }
   }
 }

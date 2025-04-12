@@ -7,6 +7,8 @@ import {
 export interface Database {
   gas_prices: GasPricesTable
   electricity_prices: ElectricityPricesTable
+  gas_readings: GasReadingTable
+  electricity_readings: ElectricityReadingTable
 }
 
 export interface GasPricesTable {
@@ -35,7 +37,7 @@ export type GasReadingTable = {
   kwh_difference: number;
   price: number;
   electricity_price_id: number;
-  createdAt: Date;
+  created_at: Date;
 };
 
 export type ElectricityReadingTable = {
@@ -44,7 +46,7 @@ export type ElectricityReadingTable = {
   kwh_difference: number;
   price: number;
   electricity_price_id: number;
-  createdAt: Date;
+  created_at: Date;
 };
 
 export type GasReading = Selectable<GasReadingTable>
