@@ -13,6 +13,8 @@ export const loadAllReadingsOpts = (pageOpts: loadAllReadingsPageOpts) =>
 export type loadAllReadingsPageOpts = {
   limit: number
   offset: number
+  sortOrder: "asc" | "desc"
+  sortKey: "kwh" | "kwh_difference" | "kwh_difference_percentage" | "price" | "created_at" | "base_price" | "type"
 }
 
 export const loadAllReadings = createServerFn()
@@ -64,7 +66,7 @@ export const loadAllReadings = createServerFn()
         "readings.base_price",
         "readings.type",
       ])
-      .orderBy("readings.created_at", "desc")
+      .orderBy(`readings.${ctx.data.sortKey}`, ctx.data.sortOrder)
       .limit(ctx.data.limit)
       .offset(ctx.data.offset * ctx.data.limit);
 
