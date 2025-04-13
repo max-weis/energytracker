@@ -7,9 +7,8 @@ CREATE TABLE IF NOT EXISTS electricity_prices (
 
 INSERT INTO electricity_prices (base_price, unit_price, created_at)
 VALUES
-  (1500, 25, "2019-10-07T08:23:19.120Z"),
-  (1600, 26, "2021-07-01T12:51:33Z"),
-  (1700, 27, "2023-01-01T08:13:42Z");
+  (1500, 26, "2024-01-01T08:23:19.120Z"),
+  (1600, 36, "2025-01-01T12:51:33Z");
 
 CREATE TABLE IF NOT EXISTS gas_prices (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

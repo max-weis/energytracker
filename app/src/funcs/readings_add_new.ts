@@ -58,6 +58,7 @@ export const addNewReadings = createServerFn({
       insertPromises.push(db.insertInto("electricity_readings").values({
         kwh: newReadings.electricity,
         kwh_difference: electricityDiff,
+        kwh_difference_percentage: (electricityDiff / latestReadings.electricity) * 100,
         electricity_price_id: latestPrice.id,
         price: electricityDiff * latestPrice.unit_price
       }).execute());
@@ -71,6 +72,7 @@ export const addNewReadings = createServerFn({
       insertPromises.push(db.insertInto("gas_readings").values({
         kwh: newReadings.gas,
         kwh_difference: gasDiff,
+        kwh_difference_percentage: (gasDiff / latestReadings.gas) * 100,
         gas_price_id: latestPrice.id,
         price: gasDiff * latestPrice.unit_price
       }).execute());

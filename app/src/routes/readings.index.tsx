@@ -2,12 +2,19 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { PlusCircle } from 'lucide-react'
 import { ReadingsTable } from '~/components/readings_table/readings_table';
 import { Button } from '~/components/ui/button'
-import { loadAllReadingsOpts } from '~/funcs/readings_load_all';
+
+type PaginationSearch = {
+  limit: number
+  offset: number
+}
 
 export const Route = createFileRoute('/readings/')({
   component: RouteComponent,
-  loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(loadAllReadingsOpts());
+  validateSearch: (search: Record<string, unknown>): PaginationSearch => {
+    return {
+      limit: Number(search.limit) || 10,
+      offset: Number(search.offset) || 0,
+    }
   },
 })
 

@@ -35,6 +35,7 @@ export type GasReadingTable = {
   id: Generated<number>
   kwh: number;
   kwh_difference: number;
+  kwh_difference_percentage: number;
   price: number;
   gas_price_id: number;
   created_at: Generated<Date>;
@@ -44,6 +45,7 @@ export type ElectricityReadingTable = {
   id: Generated<number>
   kwh: number;
   kwh_difference: number;
+  kwh_difference_percentage: number;
   price: number;
   electricity_price_id: number;
   created_at: Generated<Date>;
