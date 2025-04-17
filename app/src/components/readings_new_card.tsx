@@ -14,6 +14,8 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { loadLatestReadingsOpts } from "~/funcs/readings_load_latest";
 import { addNewReadings } from "~/funcs/readings_add_new";
+import { toast } from "sonner";
+import { Link } from "@tanstack/react-router";
 
 export function ReadingsNewCard() {
   const { data } = useSuspenseQuery(loadLatestReadingsOpts());
@@ -22,6 +24,11 @@ export function ReadingsNewCard() {
   const addNewReadingMutation = useMutation({
     mutationFn: useServerFn(addNewReadings),
     onSuccess: () => {
+      toast.success(
+        <span>
+          Reading added successfully. <Link to="/readings" search={{ limit: 10, offset: 0, sortOrder: 'desc', sortKey: 'created_at' }} className="underline">See all</Link>
+        </span>
+      );
       queryClient.invalidateQueries({queryKey: ["loadLatestReadings"]})
     }
   });

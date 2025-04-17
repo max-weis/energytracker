@@ -13,6 +13,7 @@ import { Navigation } from "~/components/navigation";
 import { NotFound } from "~/components/not_found";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/lib/seo";
+import { Toaster } from "sonner";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -66,6 +67,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <Toaster />
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
