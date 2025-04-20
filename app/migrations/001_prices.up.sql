@@ -5,11 +5,6 @@ CREATE TABLE IF NOT EXISTS electricity_prices (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-INSERT INTO electricity_prices (base_price, unit_price, created_at)
-VALUES
-  (1500, 26, "2024-01-01T08:23:19.120Z"),
-  (1600, 36, "2025-01-01T12:51:33Z");
-
 CREATE TABLE IF NOT EXISTS gas_prices (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   base_price INTEGER NOT NULL,
@@ -17,8 +12,10 @@ CREATE TABLE IF NOT EXISTS gas_prices (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-INSERT INTO gas_prices (base_price, unit_price, created_at)
-VALUES
-  (1000, 12, "2020-01-01T12:23:12Z"),
-  (1100, 13, "2021-01-01T08:16:09Z"),
-  (1050, 14, "2022-01-01T19:57:31Z");
+INSERT INTO electricity_prices (base_price, unit_price, created_at) VALUES
+  (1000, 30, '2025-01-01'),
+  (1100, 32, '2025-07-01');
+
+INSERT INTO gas_prices (base_price, unit_price, created_at) VALUES
+  (800, 20, '2025-01-01'),
+  (850, 22, '2025-07-01');

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { PlusCircle } from 'lucide-react'
 import { Button } from '~/components/ui/button'
 import { DashboardOverview } from '~/components/dashboard_overview'
+import { DashboardChartUsage } from '~/components/dashboard_chart_usage'
 
 export const Route = createFileRoute('/dashboard')({
     component: RouteComponent,
@@ -23,6 +24,7 @@ function RouteComponent() {
                     </Link>
                 </div>
                 <DashboardOverview />
+                <DashboardChartUsage />
             </div>
         </div>
     </>
