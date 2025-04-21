@@ -65,7 +65,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="bg-tertiary">
         {children}
         <Toaster />
         <TanStackRouterDevtools position="bottom-right" />

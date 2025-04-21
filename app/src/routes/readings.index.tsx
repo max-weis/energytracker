@@ -40,7 +40,7 @@ function RouteComponent() {
               Meter Readings
             </h2>
             <Link to="/readings/new">
-              <Button variant="outline">
+              <Button variant="outline" className="bg-primary text-background">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add Reading
               </Button>

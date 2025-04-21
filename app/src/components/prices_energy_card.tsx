@@ -40,7 +40,7 @@ export function PricesEnergyCard() {
 
   return (
     <div>
-      <Card>
+      <Card className="bg-background">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -177,7 +177,7 @@ export function PricesEnergyCard() {
           </CardContent>
 
           <CardFooter>
-            <Button className="mt-4" variant="outline" type="submit">
+            <Button className="mt-4 bg-primary text-background" variant="outline" type="submit">
               Save Changes
             </Button>
           </CardFooter>

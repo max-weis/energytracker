@@ -20,11 +20,11 @@ export const columns: ColumnDef<Reading>[] = [
     header: "Type",
     cell: ({ row }) =>
       row.getValue("type") === "electricity" ? (
-        <Badge variant="secondary" className="bg-yellow-500">
+        <Badge variant="secondary" className="bg-yellow-500 text-foreground">
           Electricity
         </Badge>
       ) : (
-        <Badge variant="secondary" className="bg-blue-500 text-white">
+        <Badge variant="secondary" className="bg-blue-500 text-background">
           Gas
         </Badge>
       ),

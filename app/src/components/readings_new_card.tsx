@@ -44,7 +44,7 @@ export function ReadingsNewCard() {
   });
 
   return (
-    <div>
+    <div className="bg-background">
       <Card>
         <form
           onSubmit={(e) => {
@@ -111,7 +111,7 @@ export function ReadingsNewCard() {
           </CardContent>
 
           <CardFooter>
-            <Button className="mt-4" variant="outline" type="submit">
+            <Button className="mt-4 bg-primary text-background" variant="outline" type="submit">
               Save Changes
             </Button>
           </CardFooter>

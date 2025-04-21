@@ -6,7 +6,7 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -15,7 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table"
+} from "../ui/table";
 import { columns } from "./readings_table_columns";
 import { Button } from "../ui/button";
 import { getRouteApi, Link, useNavigate } from "@tanstack/react-router";
@@ -26,15 +26,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
+} from "../ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-const routeApi = getRouteApi('/readings/')
+const routeApi = getRouteApi("/readings/");
 
 export function ReadingsTable() {
-  const routeSearch = routeApi.useSearch()
-  const navigate = useNavigate({ from: "/readings" })
+  const routeSearch = routeApi.useSearch();
+  const navigate = useNavigate({ from: "/readings" });
 
-  const { data, isLoading } = useSuspenseQuery(loadAllReadingsOpts(routeSearch));
+  const { data, isLoading } = useSuspenseQuery(
+    loadAllReadingsOpts(routeSearch),
+  );
 
   if (isLoading) return <Spinner />;
 
@@ -45,11 +47,11 @@ export function ReadingsTable() {
     columns,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-  })
+  });
 
   return (
-    <div>
-      <div className="rounded-md border bg-white">
+    <div className="p-4">
+      <div className="rounded-md border bg-background">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -60,11 +62,11 @@ export function ReadingsTable() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -78,14 +80,20 @@ export function ReadingsTable() {
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   No results.
                 </TableCell>
               </TableRow>
@@ -96,19 +104,30 @@ export function ReadingsTable() {
       <div className="flex items-center justify-end space-x-2 py-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button size="sm" variant="outline"><ChevronDown /> {routeSearch.limit}</Button>
+            <Button size="sm" variant="outline">
+              <ChevronDown /> {routeSearch.limit}
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-white">
             <DropdownMenuLabel>Page Size</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {[10, 25, 50, 100].map((limit) => (
-              <DropdownMenuItem key={limit} onSelect={() => navigate({ search: (prev) => ({ ...prev, limit: limit }) })}>
+              <DropdownMenuItem
+                key={limit}
+                onSelect={() =>
+                  navigate({ search: (prev) => ({ ...prev, limit: limit }) })
+                }
+              >
                 {limit}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
-        <Link disabled={routeSearch.offset === 0} to="." search={(prev) => ({ ...prev, offset: prev.offset! - 1 })}>
+        <Link
+          disabled={routeSearch.offset === 0}
+          to="."
+          search={(prev) => ({ ...prev, offset: prev.offset! - 1 })}
+        >
           <Button
             variant="outline"
             size="sm"
@@ -117,7 +136,11 @@ export function ReadingsTable() {
             Previous
           </Button>
         </Link>
-        <Link disabled={data.length < routeSearch.limit} to="." search={(prev) => ({ ...prev, offset: prev.offset! + 1 })}>
+        <Link
+          disabled={data.length < routeSearch.limit}
+          to="."
+          search={(prev) => ({ ...prev, offset: prev.offset! + 1 })}
+        >
           <Button
             variant="outline"
             size="sm"
@@ -128,5 +151,5 @@ export function ReadingsTable() {
         </Link>
       </div>
     </div>
-  )
+  );
 }

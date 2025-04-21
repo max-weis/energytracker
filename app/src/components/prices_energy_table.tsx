@@ -12,7 +12,7 @@ export function PricesEnergyTable() {
 
   return (
     <>
-      <Card className="p-4">
+      <Card className="p-4 bg-background">
         <Table>
           <TableHeader>
             <TableRow>
@@ -28,8 +28,8 @@ export function PricesEnergyTable() {
                 <TableCell>
                   {
                     price.type === "electricity" ?
-                      <Badge variant="secondary" className="bg-yellow-500">Electricity</Badge> :
-                      <Badge variant="secondary" className="bg-blue-500 text-white">Gas</Badge>
+                      <Badge variant="secondary" className="bg-yellow-500 text-foreground">Electricity</Badge> :
+                      <Badge variant="secondary" className="bg-blue-500 text-background">Gas</Badge>
                   }
                 </TableCell>
                 <TableCell>{formatEuroCents(price.base_price)}</TableCell>

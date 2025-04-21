@@ -13,7 +13,7 @@ export function DashboardChartUsage() {
   const { data: chartData } = useSuspenseQuery(getDashboardUsageOpts());
 
   return (
-    <Card>
+    <Card className="bg-background">
       <CardHeader>
         <CardTitle>Usage - last 6 months</CardTitle>
       </CardHeader>
