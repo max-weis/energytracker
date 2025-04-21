@@ -11,11 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PricesImport } from '../routes/reports.index
+import { Route as PricesImport } from './routes/prices'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as IndexImport } from './routes/index'
 import { Route as ReportsIndexImport } from './routes/reports.index'
 import { Route as ReadingsIndexImport } from './routes/readings.index'
+import { Route as ReportsNewImport } from './routes/reports.new'
 import { Route as ReadingsNewImport } from './routes/readings.new'
 
 // Create/Update Routes
@@ -47,6 +48,12 @@ const ReportsIndexRoute = ReportsIndexImport.update({
 const ReadingsIndexRoute = ReadingsIndexImport.update({
   id: '/readings/',
   path: '/readings/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReportsNewRoute = ReportsNewImport.update({
+  id: '/reports/new',
+  path: '/reports/new',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReadingsNewImport
       parentRoute: typeof rootRoute
     }
+    '/reports/new': {
+      id: '/reports/new'
+      path: '/reports/new'
+      fullPath: '/reports/new'
+      preLoaderRoute: typeof ReportsNewImport
+      parentRoute: typeof rootRoute
+    }
     '/readings/': {
       id: '/readings/'
       path: '/readings'
@@ -112,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/prices': typeof PricesRoute
   '/readings/new': typeof ReadingsNewRoute
+  '/reports/new': typeof ReportsNewRoute
   '/readings': typeof ReadingsIndexRoute
   '/reports': typeof ReportsIndexRoute
 }
@@ -121,6 +136,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/prices': typeof PricesRoute
   '/readings/new': typeof ReadingsNewRoute
+  '/reports/new': typeof ReportsNewRoute
   '/readings': typeof ReadingsIndexRoute
   '/reports': typeof ReportsIndexRoute
 }
@@ -131,6 +147,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/prices': typeof PricesRoute
   '/readings/new': typeof ReadingsNewRoute
+  '/reports/new': typeof ReportsNewRoute
   '/readings/': typeof ReadingsIndexRoute
   '/reports/': typeof ReportsIndexRoute
 }
@@ -142,6 +159,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/prices'
     | '/readings/new'
+    | '/reports/new'
     | '/readings'
     | '/reports'
   fileRoutesByTo: FileRoutesByTo
@@ -150,6 +168,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/prices'
     | '/readings/new'
+    | '/reports/new'
     | '/readings'
     | '/reports'
   id:
@@ -158,6 +177,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/prices'
     | '/readings/new'
+    | '/reports/new'
     | '/readings/'
     | '/reports/'
   fileRoutesById: FileRoutesById
@@ -168,6 +188,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   PricesRoute: typeof PricesRoute
   ReadingsNewRoute: typeof ReadingsNewRoute
+  ReportsNewRoute: typeof ReportsNewRoute
   ReadingsIndexRoute: typeof ReadingsIndexRoute
   ReportsIndexRoute: typeof ReportsIndexRoute
 }
@@ -177,6 +198,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   PricesRoute: PricesRoute,
   ReadingsNewRoute: ReadingsNewRoute,
+  ReportsNewRoute: ReportsNewRoute,
   ReadingsIndexRoute: ReadingsIndexRoute,
   ReportsIndexRoute: ReportsIndexRoute,
 }
@@ -195,6 +217,7 @@ export const routeTree = rootRoute
         "/dashboard",
         "/prices",
         "/readings/new",
+        "/reports/new",
         "/readings/",
         "/reports/"
       ]
@@ -210,6 +233,9 @@ export const routeTree = rootRoute
     },
     "/readings/new": {
       "filePath": "readings.new.tsx"
+    },
+    "/reports/new": {
+      "filePath": "reports.new.tsx"
     },
     "/readings/": {
       "filePath": "readings.index.tsx"
