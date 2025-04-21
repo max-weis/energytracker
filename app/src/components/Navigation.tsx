@@ -34,7 +34,7 @@ export function Navigation() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 bg-white w-full border-b pl-4">
+    <header className="sticky top-0 z-50 bg-background text-foreground w-full border-b pl-4">
       <div className="container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
@@ -49,7 +49,7 @@ export function Navigation() {
                     className={cn(
                       navigationMenuTriggerStyle(),
                       location.pathname === item.href &&
-                      "bg-accent text-accent-foreground",
+                      "text-primary",
                     )}
                   >
                     <Link to={item.href}>{item.title}</Link>

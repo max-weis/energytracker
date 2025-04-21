@@ -34,8 +34,8 @@ export function DashboardChartUsage() {
           />
           <ChartTooltip content={<ChartTooltipContent />} />
           <ChartLegend content={<ChartLegendContent />} />
-          <Line type="monotone" dataKey="electricity" stroke="#EAB209" strokeWidth={2} dot={{ r: 4 }} />
-          <Line type="monotone" dataKey="gas" stroke="#3B83F7" strokeWidth={2} dot={{ r: 4 }} />
+          <Line type="monotone" dataKey="electricity" stroke="#EAB209" strokeWidth={2} dot={{ r: 4 }} isAnimationActive={false} />
+          <Line type="monotone" dataKey="gas" stroke="#3B83F7" strokeWidth={2} dot={{ r: 4 }} isAnimationActive={false} />
         </LineChart>
       </ChartContainer>
     </Card>
